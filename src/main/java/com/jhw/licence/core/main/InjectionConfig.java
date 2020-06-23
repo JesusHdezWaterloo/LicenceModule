@@ -5,6 +5,7 @@ import com.jhw.licence.core.app.LicenceUseCase;
 import com.jhw.licence.core.app.LicenceUseCaseImpl;
 
 /**
+ * Configuracion del injection del modulo de licencia-core.
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */

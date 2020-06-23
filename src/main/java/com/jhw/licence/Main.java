@@ -27,7 +27,7 @@ public class Main {
 
         System.out.println("123");
         Date inicio = new Date();
-        Date fin = new Date(120, 6, 20);
+        Date fin = new Date(120, 6, 21);
         long token = GENERATOR.generateToken(inicio, fin, CONFIG.DIFICULTY);
         Licence lic = new Licence(token, inicio, fin);
 
@@ -35,6 +35,7 @@ public class Main {
         System.out.println(TO_SEND);
         LicenceUseCase useCase = LicenceModule.getInstance().getImplementation(LicenceUseCase.class);
         useCase.activateLicence(TO_SEND);
+        System.out.println(useCase.isLicenceCorrect());
 
         //LicenceUseCase useCase = new LicenceUseCaseImpl(new File("licence.lic"));
         //System.out.println(useCase.isLicenceCorrect());

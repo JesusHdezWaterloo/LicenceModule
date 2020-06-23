@@ -6,6 +6,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 /**
+ * Modulo de licencia-core.
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */

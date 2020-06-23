@@ -5,6 +5,7 @@ import com.jhw.licence.core.app.LicenceRepo;
 import com.google.inject.AbstractModule;
 
 /**
+ * Configuracion del injection del modulo de licencia-repo.
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
