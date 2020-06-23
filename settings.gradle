@@ -1,0 +1,6 @@
+rootProject.name = 'LicenceModule'
+
+include ':utils', ':clean-core'
+
+project(':utils').projectDir = "E:\\Trabajos\\Projects\\GIT Projects Gradle\\Utils" as File
+project(':clean-core').projectDir = "E:\\Trabajos\\Projects\\GIT Projects Gradle\\CleanCoreFull" as File
