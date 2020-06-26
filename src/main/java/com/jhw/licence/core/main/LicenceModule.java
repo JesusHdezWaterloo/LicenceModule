@@ -1,8 +1,7 @@
 package com.jhw.licence.core.main;
 
-import com.clean.core.app.modules.CoreModule;
+import com.clean.core.app.modules.AbstractModule;
 import com.clean.core.app.modules.DefaultAbstractModule;
-import com.clean.core.app.modules.RepoModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
@@ -11,7 +10,7 @@ import com.google.inject.Injector;
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
-public class LicenceModule extends DefaultAbstractModule implements CoreModule {
+public class LicenceModule extends DefaultAbstractModule {
 
     private final Injector inj = Guice.createInjector(new InjectionConfig());
 
@@ -26,7 +25,7 @@ public class LicenceModule extends DefaultAbstractModule implements CoreModule {
         return INSTANCE;
     }
 
-    public static LicenceModule init(RepoModule repoModule) {
+    public static LicenceModule init(AbstractModule repoModule) {
         INSTANCE = new LicenceModule();
         INSTANCE.registerModule(repoModule);
         return getInstance();
