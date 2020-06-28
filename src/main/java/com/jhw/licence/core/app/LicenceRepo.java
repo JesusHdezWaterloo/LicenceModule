@@ -1,6 +1,6 @@
 package com.jhw.licence.core.app;
 
-import com.clean.core.app.repo.RWRepository;
+import com.clean.core.app.repo.ReadWriteRepository;
 import com.jhw.licence.core.domain.Licence;
 
 /**
@@ -8,7 +8,7 @@ import com.jhw.licence.core.domain.Licence;
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
-public interface LicenceRepo extends RWRepository<Licence> {
+public interface LicenceRepo extends ReadWriteRepository<Licence> {
 
     /**
      * Lee la licencia del fichero.
