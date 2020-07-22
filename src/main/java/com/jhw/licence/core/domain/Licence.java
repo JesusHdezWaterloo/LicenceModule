@@ -4,23 +4,20 @@ import com.clean.core.domain.EntityDomainObject;
 import com.clean.core.exceptions.ValidationException;
 import com.clean.core.utils.validation.ValidationResult;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import static com.jhw.licence.core.main.CONFIG.DIFICULTY;
+import static com.jhw.licence.core.module.CONFIG.DIFICULTY;
+import com.jhw.utils.clean.EntityDomainObjectValidated;
 import com.jhw.utils.security.SHA;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Objeto dominio Licencia.
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
-@Getter
-@Setter
-public class Licence extends EntityDomainObject implements Serializable {
+public class Licence extends EntityDomainObjectValidated {
 
     /**
      * Separador del toString
@@ -92,17 +89,36 @@ public class Licence extends EntityDomainObject implements Serializable {
         token = Long.parseLong(fromString.substring(22, fromString.length()));
     }
 
-    /**
-     * Valida el objeto
-     *
-     * @return
-     * @throws ValidationException
-     */
-    @Override
-    public ValidationResult validate() throws ValidationException {
-        ValidationResult v = new ValidationResult();
-        //v.checkFromAnnotations(this);
-        return v.throwException();
+    public long getToken() {
+        return token;
+    }
+
+    public void setToken(long token) {
+        this.token = token;
+    }
+
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public Date getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(Date fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public Date getFechaUltimoRevisado() {
+        return fechaUltimoRevisado;
+    }
+
+    public void setFechaUltimoRevisado(Date fechaUltimoRevisado) {
+        this.fechaUltimoRevisado = fechaUltimoRevisado;
     }
 
     @Override

@@ -1,8 +1,8 @@
-package com.jhw.licence.core.main;
+package com.jhw.licence.core.module;
 
 import com.google.inject.AbstractModule;
-import com.jhw.licence.core.app.LicenceUseCase;
-import com.jhw.licence.core.app.LicenceUseCaseImpl;
+import com.jhw.licence.core.usecase_def.LicenceUseCase;
+import com.jhw.licence.core.usecase_impl.LicenceUseCaseImpl;
 
 /**
  * Configuracion del injection del modulo de licencia-core.

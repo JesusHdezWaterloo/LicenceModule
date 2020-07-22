@@ -1,7 +1,7 @@
-package com.jhw.licence.repo.main;
+package com.jhw.licence.repo.module;
 
-import com.jhw.licence.repo.app.LicenceRepoImpl;
-import com.jhw.licence.core.app.LicenceRepo;
+import com.jhw.licence.repo.repo_impl.LicenceRepoImpl;
+import com.jhw.licence.core.repo_def.LicenceRepo;
 import com.google.inject.AbstractModule;
 
 /**

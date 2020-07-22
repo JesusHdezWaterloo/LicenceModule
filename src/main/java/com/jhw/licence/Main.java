@@ -5,12 +5,12 @@
  */
 package com.jhw.licence;
 
-import com.jhw.licence.core.app.LicenceUseCase;
+import com.jhw.licence.core.usecase_def.LicenceUseCase;
 import com.jhw.licence.core.domain.Licence;
-import com.jhw.licence.core.main.CONFIG;
-import com.jhw.licence.core.main.LicenceModule;
+import com.jhw.licence.core.module.CONFIG;
+import com.jhw.licence.core.module.LicenceModule;
 import com.jhw.licence.generator.GENERATOR;
-import com.jhw.licence.repo.main.LicenceRepoModule;
+import com.jhw.licence.repo.module.LicenceRepoModule;
 import java.util.Date;
 
 /**

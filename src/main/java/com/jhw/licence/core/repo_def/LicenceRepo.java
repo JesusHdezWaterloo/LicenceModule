@@ -1,4 +1,4 @@
-package com.jhw.licence.core.app;
+package com.jhw.licence.core.repo_def;
 
 import com.clean.core.app.repo.ReadWriteRepository;
 import com.jhw.licence.core.domain.Licence;

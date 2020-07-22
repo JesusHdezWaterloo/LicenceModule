@@ -1,4 +1,4 @@
-package com.jhw.licence.repo.main;
+package com.jhw.licence.repo.module;
 
 import com.clean.core.app.modules.DefaultAbstractModule;
 import com.google.inject.Guice;

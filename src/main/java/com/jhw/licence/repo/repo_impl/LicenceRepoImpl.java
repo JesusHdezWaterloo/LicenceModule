@@ -1,8 +1,8 @@
-package com.jhw.licence.repo.app;
+package com.jhw.licence.repo.repo_impl;
 
-import com.jhw.licence.core.app.LicenceRepo;
+import com.jhw.licence.core.repo_def.LicenceRepo;
 import com.jhw.licence.core.domain.Licence;
-import com.jhw.licence.core.main.CONFIG;
+import com.jhw.licence.core.module.CONFIG;
 import com.jhw.utils.jackson.JACKSON;
 import com.jhw.utils.security.AES;
 import java.io.File;

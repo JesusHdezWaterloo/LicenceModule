@@ -1,4 +1,4 @@
-package com.jhw.licence.core.app;
+package com.jhw.licence.core.usecase_def;
 
 import com.clean.core.app.usecase.AbstractUseCase;
 

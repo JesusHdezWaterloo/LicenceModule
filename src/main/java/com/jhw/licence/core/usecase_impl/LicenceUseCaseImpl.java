@@ -1,9 +1,11 @@
-package com.jhw.licence.core.app;
+package com.jhw.licence.core.usecase_impl;
 
+import com.jhw.licence.core.repo_def.LicenceRepo;
 import com.google.common.io.BaseEncoding;
+import com.jhw.licence.core.usecase_def.LicenceUseCase;
 import com.jhw.licence.core.domain.Licence;
-import com.jhw.licence.core.main.CONFIG;
-import com.jhw.licence.core.main.LicenceModule;
+import com.jhw.licence.core.module.CONFIG;
+import com.jhw.licence.core.module.LicenceModule;
 import com.jhw.utils.security.AES;
 import java.util.Date;
 import javax.inject.Inject;

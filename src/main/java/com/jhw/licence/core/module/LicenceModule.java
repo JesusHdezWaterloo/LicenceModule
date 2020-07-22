@@ -1,4 +1,4 @@
-package com.jhw.licence.core.main;
+package com.jhw.licence.core.module;
 
 import com.clean.core.app.modules.AbstractModule;
 import com.clean.core.app.modules.DefaultAbstractModule;
