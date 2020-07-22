@@ -26,4 +26,6 @@ public interface LicenceUseCase extends AbstractUseCase {
      * @throws Exception si hay algun problema en la activacion
      */
     public void activateLicence(String codeCypher) throws Exception;
+
+    public int daysUntilActivation() throws Exception;
 }

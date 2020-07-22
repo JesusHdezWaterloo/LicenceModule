@@ -6,6 +6,7 @@ import com.clean.core.utils.validation.ValidationResult;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import static com.jhw.licence.core.module.CONFIG.DIFICULTY;
 import com.jhw.utils.clean.EntityDomainObjectValidated;
+import com.jhw.utils.others.Misc;
 import com.jhw.utils.security.SHA;
 import java.io.Serializable;
 import java.text.ParseException;
@@ -87,6 +88,10 @@ public class Licence extends EntityDomainObjectValidated {
         fechaFin = sdf.parse(fin);
 
         token = Long.parseLong(fromString.substring(22, fromString.length()));
+    }
+
+    public int daysUntilActivation() {
+        return (int) Misc.daysBetween(fechaInicio, fechaFin);
     }
 
     public long getToken() {

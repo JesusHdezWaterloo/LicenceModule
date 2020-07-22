@@ -6,29 +6,52 @@ import com.clean.swing.app.AbstractSwingApplication;
 import com.clean.swing.app.AbstractSwingMainModule;
 import com.clean.swing.app.dashboard.DashBoardSimple;
 import com.clean.swing.app.dashboard.DashboardConstants;
+import com.jhw.licence.core.module.LicenceModule;
+import com.jhw.licence.core.usecase_def.LicenceUseCase;
+import com.jhw.licence.repo.module.LicenceRepoModule;
+import com.jhw.licence.services.LicenceService;
 import com.jhw.swing.material.standars.MaterialIcons;
 import java.awt.event.ActionEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 
 public class LicenceSwingModule implements AbstractSwingMainModule {
 
     private final LicenceModuleNavigator navigator = new LicenceModuleNavigator();
 
+    public static LicenceUseCase licenceUC;
+
+    public LicenceSwingModule() {
+        init();
+    }
+
+    private void init() {
+        LicenceModule core = LicenceModule.init(LicenceRepoModule.init());
+        licenceUC = core.getImplementation(LicenceUseCase.class);
+
+        LicenceService.registerLicenceService(licenceUC);
+    }
+
     @Override
     public void register(AbstractSwingApplication app) {
-        System.out.println("Creando 'Persons'");
+        System.out.println("Creando 'Licencia'");
         registerLicence(app);
     }
 
     private void registerLicence(AbstractSwingApplication app) {
         DashBoardSimple dash = app.rootView().dashboard();
 
-        dash.putKeyValue(DashboardConstants.DOWN_LICENCE, new AbstractAction("X Días para activar", MaterialIcons.SECURITY.deriveIcon(16)) {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Notification.showConfirmDialog(NotificationsGeneralType.CONFIRM_ERROR, "ACTIVAR LICENCIA");
-            }
-        });
+        try {
+            dash.putKeyValue(DashboardConstants.DOWN_LICENCE, new AbstractAction(LicenceService.daysUntilActivation() + " Días restantes", MaterialIcons.SECURITY.deriveIcon(16)) {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    Notification.showConfirmDialog(NotificationsGeneralType.CONFIRM_ERROR, "ACTIVAR LICENCIA");
+                }
+            });
+        } catch (Exception ex) {
+            Logger.getLogger(LicenceSwingModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override

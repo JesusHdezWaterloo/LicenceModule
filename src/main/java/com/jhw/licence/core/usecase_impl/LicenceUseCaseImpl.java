@@ -59,6 +59,11 @@ public class LicenceUseCaseImpl implements LicenceUseCase {
         return false;
     }
 
+    @Override
+    public int daysUntilActivation() throws Exception {
+        return repo.read().daysUntilActivation();
+    }
+
     /**
      * Activa la licencia. Si el codigo de cifrado esta bien, la activa y guarda
      * en memoria, sino lanza excepcion.

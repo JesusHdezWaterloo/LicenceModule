@@ -23,11 +23,11 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        LicenceModule.init(new LicenceRepoModule());
+        LicenceModule.init(LicenceRepoModule.init());
 
         System.out.println("123");
         Date inicio = new Date();
-        Date fin = new Date(120, 6, 21);
+        Date fin = new Date(120, 7, 21);
         long token = GENERATOR.generateToken(inicio, fin, CONFIG.DIFICULTY);
         Licence lic = new Licence(token, inicio, fin);
 

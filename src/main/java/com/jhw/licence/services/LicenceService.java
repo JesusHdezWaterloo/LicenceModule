@@ -36,4 +36,12 @@ public class LicenceService {
             licenceUC.activateLicence(codeCypher);
         }
     }
+
+    public static int daysUntilActivation() throws Exception {
+        if (licenceUC != null) {
+            return licenceUC.daysUntilActivation();
+        }
+        return 0;
+    }
+
 }
