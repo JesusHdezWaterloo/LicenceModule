@@ -3,6 +3,7 @@ package com.jhw.licence.ui.module;
 import com.clean.core.app.services.ExceptionHandler;
 import com.clean.core.app.services.Notification;
 import com.clean.core.app.services.NotificationsGeneralType;
+import com.clean.core.domain.services.Resource;
 import com.clean.swing.app.AbstractSwingApplication;
 import com.clean.swing.app.AbstractSwingMainModule;
 import com.clean.swing.app.dashboard.DashBoardSimple;
@@ -21,6 +22,8 @@ import java.net.MalformedURLException;
 import javax.swing.AbstractAction;
 
 public class LicenceSwingModule implements AbstractSwingMainModule {
+
+    public static final String MSG_DAYS_TO_ACTIVATE = "msg.licence.days_to_activate";
 
     private final LicenceModuleNavigator navigator = new LicenceModuleNavigator();
 
@@ -54,7 +57,7 @@ public class LicenceSwingModule implements AbstractSwingMainModule {
     private void registerLicence(AbstractSwingApplication app) {
         DashBoardSimple dash = app.rootView().dashboard();
 
-        dash.putKeyValue(DashboardConstants.DOWN_LICENCE, new AbstractAction(LicenceHandler.daysUntilActivation() + " Días restantes", MaterialIcons.SECURITY.deriveIcon(16)) {
+        dash.putKeyValue(DashboardConstants.DOWN_LICENCE, new AbstractAction(LicenceHandler.daysUntilActivation() + " " + Resource.getString(MSG_DAYS_TO_ACTIVATE), MaterialIcons.SECURITY.deriveIcon(16)) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Notification.showConfirmDialog(NotificationsGeneralType.CONFIRM_ERROR, "ACTIVAR LICENCIA");
