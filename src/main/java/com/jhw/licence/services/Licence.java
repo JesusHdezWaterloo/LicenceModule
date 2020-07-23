@@ -6,25 +6,25 @@
 package com.jhw.licence.services;
 
 import com.google.inject.Guice;
-import com.jhw.licence.core.module.InjectionConfig;
+import com.jhw.licence.core.module.InjectionConfigLicenceCore;
 import com.jhw.licence.core.usecase_def.LicenceUseCase;
 
 /**
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
-public class LicenceService {
+public class Licence {
 
-    private static LicenceUseCase licenceUC = Guice.createInjector(new InjectionConfig()).getInstance(LicenceUseCase.class);
+    private static LicenceUseCase licenceUC = Guice.createInjector(new InjectionConfigLicenceCore()).getInstance(LicenceUseCase.class);
 
-    private LicenceService() {
+    private Licence() {
     }
 
     public static void registerLicenceService(LicenceUseCase newService) {
         licenceUC = newService;
     }
 
-    public static boolean isLicenceCorrect() throws Exception {
+    public static boolean isLicenceCorrect() {
         if (licenceUC != null) {
             return licenceUC.isLicenceCorrect();
         }
@@ -37,7 +37,7 @@ public class LicenceService {
         }
     }
 
-    public static int daysUntilActivation() throws Exception {
+    public static int daysUntilActivation() {
         if (licenceUC != null) {
             return licenceUC.daysUntilActivation();
         }

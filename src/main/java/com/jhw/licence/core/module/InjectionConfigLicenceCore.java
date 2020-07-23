@@ -9,7 +9,7 @@ import com.jhw.licence.core.usecase_impl.LicenceUseCaseImpl;
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
-public class InjectionConfig extends AbstractModule {
+public class InjectionConfigLicenceCore extends AbstractModule {
 
     @Override
     protected void configure() {

@@ -17,7 +17,7 @@ public interface LicenceUseCase extends AbstractUseCase {
      * @return true si la licencia es correcta, false en cualquier otro caso
      * @throws Exception si hay algun problema en la comprobacion
      */
-    public boolean isLicenceCorrect() throws Exception;
+    public boolean isLicenceCorrect();
 
     /**
      * Activa la licencia en dependencia de un codigo de activacion cifrado
@@ -27,5 +27,5 @@ public interface LicenceUseCase extends AbstractUseCase {
      */
     public void activateLicence(String codeCypher) throws Exception;
 
-    public int daysUntilActivation() throws Exception;
+    public int daysUntilActivation();
 }

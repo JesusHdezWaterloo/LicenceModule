@@ -91,7 +91,7 @@ public class Licence extends EntityDomainObjectValidated {
     }
 
     public int daysUntilActivation() {
-        return (int) Misc.daysBetween(fechaInicio, fechaFin);
+        return (int) Misc.daysBetween(fechaUltimoRevisado, fechaFin);
     }
 
     public long getToken() {

@@ -28,6 +28,7 @@ public class LicenceUseCaseImpl implements LicenceUseCase {
      */
     @Inject
     public LicenceUseCaseImpl() {
+        isLicenceCorrect();
     }
 
     /**
@@ -36,32 +37,38 @@ public class LicenceUseCaseImpl implements LicenceUseCase {
      * actualizada.
      *
      * @return true si la licencia es correcta, false en cualquier otro caso
-     * @throws Exception si hay algun problema en la comprobacion
      */
     @Override
-    public boolean isLicenceCorrect() throws Exception {
-        Licence licence = repo.read();
-        if (licence == null) {
-            return false;
-        }
-        if (!licence.isLicenceValid()) {
-            return false;
-        }
-        Date now = new Date();
-        if (now.before(licence.getFechaUltimoRevisado())) {
-            return false;
-        }
-        licence.setFechaUltimoRevisado(now);
-        repo.write(licence);
-        if (now.after(licence.getFechaInicio()) && now.before(licence.getFechaFin())) {
-            return true;
+    public boolean isLicenceCorrect() {
+        try {
+            Licence licence = repo.read();
+            if (licence == null) {
+                return false;
+            }
+            if (!licence.isLicenceValid()) {
+                return false;
+            }
+            Date now = new Date();
+            if (now.before(licence.getFechaUltimoRevisado())) {
+                return false;
+            }
+            licence.setFechaUltimoRevisado(now);
+            repo.write(licence);
+            if (now.after(licence.getFechaInicio()) && now.before(licence.getFechaFin())) {
+                return true;
+            }
+        } catch (Exception e) {
         }
         return false;
     }
 
     @Override
-    public int daysUntilActivation() throws Exception {
-        return repo.read().daysUntilActivation();
+    public int daysUntilActivation() {
+        try {
+            return repo.read().daysUntilActivation();
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     /**

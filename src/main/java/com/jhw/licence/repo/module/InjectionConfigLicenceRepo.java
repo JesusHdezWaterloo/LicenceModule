@@ -9,7 +9,7 @@ import com.google.inject.AbstractModule;
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
-public class InjectionRepoConfig extends AbstractModule {
+public class InjectionConfigLicenceRepo extends AbstractModule {
 
     @Override
     protected void configure() {

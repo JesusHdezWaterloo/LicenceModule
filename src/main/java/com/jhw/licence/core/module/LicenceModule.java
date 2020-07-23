@@ -12,7 +12,7 @@ import com.google.inject.Injector;
  */
 public class LicenceModule extends DefaultAbstractModule {
 
-    private final Injector inj = Guice.createInjector(new InjectionConfig());
+    private final Injector inj = Guice.createInjector(new InjectionConfigLicenceCore());
 
     public static final int DIF = 4;
 

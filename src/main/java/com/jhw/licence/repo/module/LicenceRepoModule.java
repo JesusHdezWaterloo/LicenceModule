@@ -11,7 +11,7 @@ import com.google.inject.Injector;
  */
 public class LicenceRepoModule extends DefaultAbstractModule {
 
-    private final Injector inj = Guice.createInjector(new InjectionRepoConfig());
+    private final Injector inj = Guice.createInjector(new InjectionConfigLicenceRepo());
 
     private static LicenceRepoModule INSTANCE;
 
