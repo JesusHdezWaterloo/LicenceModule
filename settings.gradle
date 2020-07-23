@@ -1,4 +1,4 @@
-rootProject.name = 'LicenceModule'
+rootProject.name = 'Licence'
 
 include ':utils', ':clean-core', ':clean-swing', 'material-swing'
 
