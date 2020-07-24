@@ -1,12 +1,10 @@
 plugins {
     id 'java'
-    id 'jacoco'
-    id 'application'
 }
 
 group = 'com.jhw.licence'
 
-mainClassName = 'com.jhw.licence.Main'
+//mainClassName = 'com.jhw.licence.Main'
 
 repositories {
     jcenter()
