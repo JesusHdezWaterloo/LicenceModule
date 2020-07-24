@@ -2,6 +2,7 @@ package com.jhw.licence.core.usecase_impl;
 
 import com.clean.core.app.services.ExceptionHandler;
 import com.clean.core.app.services.Notification;
+import com.clean.core.app.usecase.DefaultReadWriteUseCase;
 import com.clean.core.domain.services.Resource;
 import com.jhw.licence.core.repo_def.LicenceRepo;
 import com.google.common.io.BaseEncoding;
@@ -20,7 +21,7 @@ import javax.inject.Inject;
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
-public class LicenceUseCaseImpl implements LicenceUseCase {
+public class LicenceUseCaseImpl extends DefaultReadWriteUseCase<Licence> implements LicenceUseCase {
 
     public static final String MSG_NO_FILE = "msg.licence.no_file";
     public static final String MSG_INVALID = "msg.licence.invalid";
@@ -37,6 +38,7 @@ public class LicenceUseCaseImpl implements LicenceUseCase {
      */
     @Inject
     public LicenceUseCaseImpl() {
+        super.setRepo(repo);
     }
 
     /**

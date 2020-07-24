@@ -4,8 +4,8 @@ import com.jhw.licence.core.repo_def.LicenceRepo;
 import com.jhw.licence.core.domain.Licence;
 import com.jhw.licence.core.module.CONFIG;
 import com.jhw.utils.jackson.JACKSON;
+import com.jhw.utils.jackson.JACKSONRepoGeneral;
 import com.jhw.utils.security.AES;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -18,18 +18,14 @@ import javax.inject.Inject;
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
-public class LicenceRepoImpl implements LicenceRepo {
-
-    /**
-     * Fichero donde se va a almacenar la licencia.
-     */
-    private File file = new File("licence.lic");
+public class LicenceRepoImpl extends JACKSONRepoGeneral<Licence> implements LicenceRepo {
 
     /**
      * Constructor por defecto, usado par injectar.
      */
     @Inject
     public LicenceRepoImpl() {
+        super("licence.lic", Licence.class);
     }
 
     /**
@@ -42,7 +38,7 @@ public class LicenceRepoImpl implements LicenceRepo {
      */
     @Override
     public Licence read() throws Exception {
-        FileInputStream fis = new FileInputStream(file);
+        FileInputStream fis = new FileInputStream(getFile());
         ObjectInputStream ois = new ObjectInputStream(fis);
         byte[] arr = (byte[]) ois.readObject();
         fis.close();
@@ -60,29 +56,15 @@ public class LicenceRepoImpl implements LicenceRepo {
      */
     @Override
     public void write(Licence lic) throws Exception {
-        FileOutputStream fos = new FileOutputStream(file);
+        FileOutputStream fos = new FileOutputStream(getFile());
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(AES.cipher(CONFIG.HARDCORE_PASSWORD, JACKSON.toString(lic).getBytes()));
         oos.close();
         fos.close();
     }
 
-    /**
-     * Getter del File donde se va a almacenar la licencia.
-     *
-     * @return File donde se va a almacenar la licencia.
-     */
-    public File getFile() {
-        return file;
-    }
-
-    /**
-     * Setter del File donde se va a almacenar la licencia.
-     *
-     * @param file donde se va a almacenar la licencia.
-     */
-    public void setFile(File file) {
-        this.file = file;
+    @Override
+    protected void onReadError(Exception e) {
     }
 
 }
