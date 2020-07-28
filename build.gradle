@@ -18,6 +18,11 @@ dependencies {
     implementation project(':utils')
     implementation project(':clean-core')
     implementation project(':clean-swing')
+    
+    implementation project(':derivable-icons')
+    implementation project(':material-standards')
+    implementation project(':material-personalization')
+    
     implementation project(':material-swing')
 
     compile group: 'com.google.inject', name: 'guice', version: '4.2.3'

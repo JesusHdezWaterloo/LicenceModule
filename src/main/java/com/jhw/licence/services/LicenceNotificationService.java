@@ -2,7 +2,7 @@ package com.jhw.licence.services;
 
 import com.clean.core.app.services.Notification;
 import com.clean.core.app.services.NotificationServiceFunctional;
-import com.jhw.swing.material.standars.MaterialIcons;
+import com.jhw.swing.material.standards.MaterialIcons;
 import javax.swing.JOptionPane;
 
 /**
