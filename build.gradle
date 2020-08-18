@@ -1,21 +1,10 @@
-buildscript{
-    repositories {
-        jcenter()
-        mavenCentral()
-    }
+plugins {
+    id 'java'
 }
-
-plugins{
-    id 'io.freefair.lombok' version "5.0.1"    
-}
-
-apply plugin: 'java'
-apply plugin: 'jacoco'
-apply plugin: 'application'
 
 group = 'com.jhw.licence'
 
-mainClassName = 'com.jhw.licence.Main'
+//mainClassName = 'com.jhw.licence.Main'
 
 repositories {
     jcenter()
@@ -24,10 +13,17 @@ repositories {
 
 
 dependencies {
-    testCompile 'junit:junit:4.12'
+    testCompile 'junit:junit:4.13'
     
     implementation project(':utils')
     implementation project(':clean-core')
+    implementation project(':clean-swing')
+    
+    implementation project(':derivable-icons')
+    implementation project(':material-standards')
+    implementation project(':material-personalization')
+    
+    implementation project(':material-swing')
 
     compile group: 'com.google.inject', name: 'guice', version: '4.2.3'
     compile group: 'javax.inject', name: 'javax.inject', version: '1'
