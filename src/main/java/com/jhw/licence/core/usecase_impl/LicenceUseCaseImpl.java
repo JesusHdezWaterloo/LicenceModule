@@ -9,7 +9,7 @@ import com.google.common.io.BaseEncoding;
 import com.jhw.licence.core.usecase_def.LicenceUseCase;
 import com.jhw.licence.core.domain.Licence;
 import com.jhw.licence.core.module.CONFIG;
-import com.jhw.licence.core.module.LicenceModule;
+import com.jhw.licence.core.module.LicenceCoreModule;
 import com.jhw.licence.core.utils.BadLicenceException;
 import com.jhw.utils.security.AES;
 import java.util.Date;
@@ -31,7 +31,7 @@ public class LicenceUseCaseImpl extends DefaultReadWriteUseCase<Licence> impleme
     /**
      * Instancia del repo para almacenar las cosas en memoria
      */
-    private final LicenceRepo repo = LicenceModule.getInstance().getImplementation(LicenceRepo.class);
+    private final LicenceRepo repo = LicenceCoreModule.getInstance().getImplementation(LicenceRepo.class);
 
     /**
      * Constructor por defecto, usado par injectar.
