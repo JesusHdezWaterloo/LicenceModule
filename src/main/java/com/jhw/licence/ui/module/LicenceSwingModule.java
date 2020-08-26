@@ -30,7 +30,7 @@ public class LicenceSwingModule implements AbstractSwingMainModule {
 
     static {
         LicenceCoreModule.init(LicenceRepoModule.init());
-        
+
         licenceUC = LicenceCoreModule.getInstance().getImplementation(LicenceUseCase.class);
     }
 
@@ -46,7 +46,6 @@ public class LicenceSwingModule implements AbstractSwingMainModule {
         } catch (MalformedURLException ex) {
             ExceptionHandler.handleException(ex);
         }
-
 
         LicenceHandler.registerLicenceService(licenceUC);
         return new LicenceSwingModule();
@@ -71,6 +70,10 @@ public class LicenceSwingModule implements AbstractSwingMainModule {
     @Override
     public void navigateTo(String string, Object... o) {
         navigator.navigateTo(string, o);
+    }
+
+    @Override
+    public void closeModule() {
     }
 
 }
