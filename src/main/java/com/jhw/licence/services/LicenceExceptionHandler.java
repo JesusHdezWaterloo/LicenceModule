@@ -32,7 +32,7 @@ public class LicenceExceptionHandler extends ExceptionHandlerServiceFunctional {
 
     @Override
     protected void addAll() {
-        addHandler(EXCEPTION_BAD_LICENCE, (Exception e) -> {
+        addHandler(EXCEPTION_BAD_LICENCE, (Throwable e) -> {
             Notification.showConfirmDialog(LicenceNotificationService.CONFIRM_BAD_LICENCE, e.getMessage());
         });
     }

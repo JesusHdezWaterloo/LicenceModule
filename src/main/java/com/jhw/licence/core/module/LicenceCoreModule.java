@@ -10,23 +10,23 @@ import com.google.inject.Injector;
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
-public class LicenceModule extends DefaultAbstractModule {
+public class LicenceCoreModule extends DefaultAbstractModule {
 
     private final Injector inj = Guice.createInjector(new InjectionConfigLicenceCore());
 
     public static final int DIF = 4;
 
-    private static LicenceModule INSTANCE;
+    private static LicenceCoreModule INSTANCE;
 
-    public static LicenceModule getInstance() {
+    public static LicenceCoreModule getInstance() {
         if (INSTANCE == null) {
             throw new NullPointerException("El modulo de licencia no se ha inicializado");
         }
         return INSTANCE;
     }
 
-    public static LicenceModule init(AbstractModule repoModule) {
-        INSTANCE = new LicenceModule();
+    public static LicenceCoreModule init(AbstractModule repoModule) {
+        INSTANCE = new LicenceCoreModule();
         INSTANCE.registerModule(repoModule);
         return getInstance();
     }
