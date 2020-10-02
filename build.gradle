@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group = 'com.jhw.licence'
+group = 'com.jhw.module.util'
 
 repositories {
     jcenter()
