@@ -31,3 +31,5 @@ src/main/java/com/jhw/licence/core/main/CONFIG.java
 lombok.config
 
 licence.lic
+
+src/main/java/com/jhw/module/util/licence/generator/GENERATOR.java
