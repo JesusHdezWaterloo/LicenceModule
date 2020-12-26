@@ -27,8 +27,10 @@ public class LicenceCoreModule extends DefaultAbstractModule {
     }
 
     public static LicenceCoreModule init() {
-        INSTANCE = new LicenceCoreModule();
-        INSTANCE.registerModule(LicenceRepoModule.init());
+        if (INSTANCE == null) {
+            INSTANCE = new LicenceCoreModule();
+            INSTANCE.registerModule(LicenceRepoModule.init());
+        }
         return getInstance();
     }
 
