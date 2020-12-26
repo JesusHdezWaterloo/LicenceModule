@@ -23,6 +23,9 @@ public class LicenceRepoImpl extends JPACleanCRUDRepo<LicenceDomain, Licence> im
         if (count() == 0) {
             create(licence);
         } else {
+            LicenceDomain actual = read();
+            licence.setIdLicence(actual.getIdLicence());
+            licence.setClientCode(actual.getClientCode());
             edit(licence);
         }
     }
