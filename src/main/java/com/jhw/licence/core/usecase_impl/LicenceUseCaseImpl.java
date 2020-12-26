@@ -1,11 +1,15 @@
 package com.jhw.licence.core.usecase_impl;
 
+import com.clean.core.app.services.ExceptionHandler;
+import com.clean.core.app.services.Notification;
+import com.clean.core.domain.services.Resource;
 import com.jhw.licence.core.repo_def.LicenceRepo;
 import com.google.common.io.BaseEncoding;
 import com.jhw.licence.core.usecase_def.LicenceUseCase;
 import com.jhw.licence.core.domain.Licence;
 import com.jhw.licence.core.module.CONFIG;
 import com.jhw.licence.core.module.LicenceModule;
+import com.jhw.licence.core.utils.BadLicenceException;
 import com.jhw.utils.security.AES;
 import java.util.Date;
 import javax.inject.Inject;
@@ -18,6 +22,11 @@ import javax.inject.Inject;
  */
 public class LicenceUseCaseImpl implements LicenceUseCase {
 
+    public static final String MSG_NO_FILE = "msg.licence.no_file";
+    public static final String MSG_INVALID = "msg.licence.invalid";
+    public static final String MSG_CORRUPT = "msg.licence.corrupt";
+    public static final String MSG_EXPIRED = "msg.licence.expired";
+
     /**
      * Instancia del repo para almacenar las cosas en memoria
      */
@@ -28,7 +37,6 @@ public class LicenceUseCaseImpl implements LicenceUseCase {
      */
     @Inject
     public LicenceUseCaseImpl() {
-        isLicenceCorrect();
     }
 
     /**
@@ -41,25 +49,32 @@ public class LicenceUseCaseImpl implements LicenceUseCase {
     @Override
     public boolean isLicenceCorrect() {
         try {
-            Licence licence = repo.read();
+            Licence licence = null;
+            try {
+                licence = repo.read();
+            } catch (Exception e) {
+            }
             if (licence == null) {
-                return false;
+                throw new BadLicenceException(Resource.getString(MSG_NO_FILE));
             }
             if (!licence.isLicenceValid()) {
-                return false;
+                throw new BadLicenceException(Resource.getString(MSG_INVALID));
             }
             Date now = new Date();
-            if (now.before(licence.getFechaUltimoRevisado())) {
-                return false;
+            if (now.before(licence.getFechaUltimoRevisado())
+                    || now.before(licence.getFechaInicio())) {
+                throw new BadLicenceException(Resource.getString(MSG_CORRUPT));
             }
             licence.setFechaUltimoRevisado(now);
             repo.write(licence);
-            if (now.after(licence.getFechaInicio()) && now.before(licence.getFechaFin())) {
-                return true;
+            if (licence.getFechaUltimoRevisado().after(licence.getFechaFin())) {
+                throw new BadLicenceException(Resource.getString(MSG_EXPIRED));
             }
+            return true;
         } catch (Exception e) {
+            ExceptionHandler.handleException(e);
+            return false;
         }
-        return false;
     }
 
     @Override

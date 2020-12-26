@@ -27,7 +27,7 @@ public class Main {
 
         System.out.println("123");
         Date inicio = new Date();
-        Date fin = new Date(120, 7, 21);
+        Date fin = new Date(150, 7, 21);
         long token = GENERATOR.generateToken(inicio, fin, CONFIG.DIFICULTY);
         Licence lic = new Licence(token, inicio, fin);
 

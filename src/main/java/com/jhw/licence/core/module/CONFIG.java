@@ -8,6 +8,6 @@ import com.jhw.utils.security.SerialNumber;
  */
 public class CONFIG {
 
-    public static final int DIFICULTY = 4; 
-    public static final byte[] HARDCORE_PASSWORD = new byte[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};//SerialNumber.getUID();
+    public static final int DIFICULTY = 4;
+    public static final byte[] HARDCORE_PASSWORD = new byte[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};//SerialNumber.getUID();
 }

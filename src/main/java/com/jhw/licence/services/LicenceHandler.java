@@ -13,11 +13,11 @@ import com.jhw.licence.core.usecase_def.LicenceUseCase;
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
-public class Licence {
+public class LicenceHandler {
 
     private static LicenceUseCase licenceUC = Guice.createInjector(new InjectionConfigLicenceCore()).getInstance(LicenceUseCase.class);
 
-    private Licence() {
+    private LicenceHandler() {
     }
 
     public static void registerLicenceService(LicenceUseCase newService) {
