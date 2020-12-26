@@ -25,15 +25,27 @@ public class LicenceConververSecured implements Converter<LicenceDomain, Licence
         //el string de la BD cifrado y en base 64
         String string = entity.getLicence();
         string = decipher(string);
-        return ConverterService.convert(string, LicenceDomain.class);
+
+        LicenceDomain domain = ConverterService.convert(string, LicenceDomain.class);
+
+        domain.setIdLicence(entity.getIdLicence());
+        domain.setClientCode(entity.getClientCode());
+
+        return domain;
     }
 
     @Override
-    public Licence to(LicenceDomain object) throws Exception {
+    public Licence to(LicenceDomain domain) throws Exception {
         //el objeto limpio, cifrarlo y encodearlo e 64
-        String string = ConverterService.convert(object, String.class);
+        String string = ConverterService.convert(domain, String.class);
         string = cipher(string);
-        return new Licence("cod_cliente_UNKNOWN", string);
+
+        Licence entity = new Licence("cod_cliente_UNKNOWN", string);
+
+        entity.setIdLicence(domain.getIdLicence());
+        entity.setClientCode(domain.getClientCode());
+
+        return entity;
     }
 
     private String cipher(String text) throws Exception {
@@ -50,7 +62,7 @@ public class LicenceConververSecured implements Converter<LicenceDomain, Licence
     private String decipher(String text) throws Exception {
         return new String(
                 AES.decipher(
-                        HARDCORE_PASS, 
+                        HARDCORE_PASS,
                         Base64.getDecoder().decode(
                                 text
                         )
