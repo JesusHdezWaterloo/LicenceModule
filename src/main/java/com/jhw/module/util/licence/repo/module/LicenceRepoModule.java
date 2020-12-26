@@ -3,6 +3,7 @@ package com.jhw.module.util.licence.repo.module;
 import com.clean.core.app.modules.DefaultAbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.jhw.module.util.licence.repo.utils.ResourcesLicence;
 
 /**
  * Modulo de licencia-core.
@@ -15,6 +16,10 @@ public class LicenceRepoModule extends DefaultAbstractModule {
 
     private static LicenceRepoModule INSTANCE;
 
+    static {
+        ResourcesLicence.initEMF();
+    }
+
     private LicenceRepoModule() {
     }
 
@@ -26,7 +31,9 @@ public class LicenceRepoModule extends DefaultAbstractModule {
     }
 
     public static LicenceRepoModule init() {
-        INSTANCE = new LicenceRepoModule();
+        if (INSTANCE == null) {
+            INSTANCE = new LicenceRepoModule();
+        }
         return getInstance();
     }
 
