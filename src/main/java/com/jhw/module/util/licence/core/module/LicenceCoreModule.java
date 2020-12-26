@@ -4,6 +4,7 @@ import com.clean.core.app.modules.AbstractModule;
 import com.clean.core.app.modules.DefaultAbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.jhw.module.util.licence.repo.module.LicenceRepoModule;
 
 /**
  * Modulo de licencia-core.
@@ -23,6 +24,12 @@ public class LicenceCoreModule extends DefaultAbstractModule {
             throw new NullPointerException("El modulo de licencia no se ha inicializado");
         }
         return INSTANCE;
+    }
+
+    public static LicenceCoreModule init() {
+        INSTANCE = new LicenceCoreModule();
+        INSTANCE.registerModule(LicenceRepoModule.init());
+        return getInstance();
     }
 
     public static LicenceCoreModule init(AbstractModule repoModule) {

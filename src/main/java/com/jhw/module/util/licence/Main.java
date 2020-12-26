@@ -7,7 +7,6 @@ package com.jhw.module.util.licence;
 
 import com.jhw.module.util.licence.core.usecase_def.LicenceUseCase;
 import com.jhw.module.util.licence.core.domain.LicenceDomain;
-import com.jhw.module.util.licence.core.module.CONFIG;
 import com.jhw.module.util.licence.core.module.LicenceCoreModule;
 import com.jhw.module.util.licence.generator.GENERATOR;
 import com.jhw.module.util.licence.repo.module.LicenceRepoModule;
