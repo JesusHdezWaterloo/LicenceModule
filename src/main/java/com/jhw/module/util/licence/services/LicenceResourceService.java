@@ -12,7 +12,7 @@ import java.net.MalformedURLException;
  */
 public class LicenceResourceService implements ResourceService {
 
-    public static final String RESOURCE_URL = "licence";
+    public static final String RESOURCE_URL = "module_licence_server";
 
     private final DefaultResourceBundleService resourceService;
 

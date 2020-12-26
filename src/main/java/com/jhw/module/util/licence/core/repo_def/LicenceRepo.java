@@ -1,13 +1,8 @@
 package com.jhw.module.util.licence.core.repo_def;
 
-import com.clean.core.app.repo.ReadWriteRepository;
-import com.jhw.module.util.licence.core.domain.Licence;
+import com.clean.core.app.repo.CRUDRepository;
+import com.jhw.module.util.licence.core.domain.*;
 
-/**
- * Interfaz de Repo para definir el trabajo de almacenamiento de la licencia.
- *
- * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
- */
-public interface LicenceRepo extends ReadWriteRepository<Licence> {
+public interface LicenceRepo extends CRUDRepository<LicenceDomain> {
 
 }

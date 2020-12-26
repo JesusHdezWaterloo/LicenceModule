@@ -11,7 +11,7 @@ import com.google.inject.Injector;
  */
 public class LicenceRepoModule extends DefaultAbstractModule {
 
-    private final Injector inj = Guice.createInjector(new InjectionConfigLicenceRepo());
+    private final Injector inj = Guice.createInjector(new LicenceRepoInjectionConfig());
 
     private static LicenceRepoModule INSTANCE;
 
@@ -20,7 +20,7 @@ public class LicenceRepoModule extends DefaultAbstractModule {
 
     public static LicenceRepoModule getInstance() {
         if (INSTANCE == null) {
-            throw new NullPointerException("El modulo de Person no se ha inicializado");
+            throw new NullPointerException("El modulo de Licencia no se ha inicializado");
         }
         return INSTANCE;
     }
@@ -37,7 +37,7 @@ public class LicenceRepoModule extends DefaultAbstractModule {
 
     @Override
     public String getModuleName() {
-        return "Licence Repo Module";
+        return "Licence Repo Module Server";
     }
 
 }

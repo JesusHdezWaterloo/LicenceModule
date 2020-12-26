@@ -6,7 +6,7 @@
 package com.jhw.module.util.licence;
 
 import com.jhw.module.util.licence.core.usecase_def.LicenceUseCase;
-import com.jhw.module.util.licence.core.domain.Licence;
+import com.jhw.module.util.licence.core.domain.LicenceDomain;
 import com.jhw.module.util.licence.core.module.CONFIG;
 import com.jhw.module.util.licence.core.module.LicenceCoreModule;
 import com.jhw.module.util.licence.generator.GENERATOR;
@@ -23,13 +23,14 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
+        /*
         LicenceCoreModule.init(LicenceRepoModule.init());
 
         System.out.println("123");
         Date inicio = new Date();
         Date fin = new Date(150, 7, 21);
         long token = GENERATOR.generateToken(inicio, fin, CONFIG.DIFICULTY);
-        Licence lic = new Licence(token, inicio, fin);
+        LicenceDomain lic = new LicenceDomain(token, inicio, fin);
 
         String TO_SEND = GENERATOR.generateActivationCode(lic, CONFIG.HARDCORE_PASSWORD);
         System.out.println(TO_SEND);
@@ -39,6 +40,7 @@ public class Main {
 
         //LicenceUseCase useCase = new LicenceUseCaseImpl(new File("licence.lic"));
         //System.out.println(useCase.isLicenceCorrect());
+        */
     }
 
 }

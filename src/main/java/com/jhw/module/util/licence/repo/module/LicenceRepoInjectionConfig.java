@@ -1,7 +1,7 @@
 package com.jhw.module.util.licence.repo.module;
 
-import com.jhw.module.util.licence.repo.repo_impl.LicenceRepoImpl;
-import com.jhw.module.util.licence.core.repo_def.LicenceRepo;
+import com.jhw.module.util.licence.repo.repo_impl.*;
+import com.jhw.module.util.licence.core.repo_def.*;
 import com.google.inject.AbstractModule;
 
 /**
@@ -9,7 +9,7 @@ import com.google.inject.AbstractModule;
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
-public class InjectionConfigLicenceRepo extends AbstractModule {
+public class LicenceRepoInjectionConfig extends AbstractModule {
 
     @Override
     protected void configure() {

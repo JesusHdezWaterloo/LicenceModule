@@ -6,7 +6,7 @@
 package com.jhw.module.util.licence.services;
 
 import com.google.inject.Guice;
-import com.jhw.module.util.licence.core.module.InjectionConfigLicenceCore;
+import com.jhw.module.util.licence.core.module.LicenceCoreInjectionConfig;
 import com.jhw.module.util.licence.core.usecase_def.LicenceUseCase;
 
 /**
@@ -15,7 +15,7 @@ import com.jhw.module.util.licence.core.usecase_def.LicenceUseCase;
  */
 public class LicenceHandler {
 
-    private static LicenceUseCase licenceUC = Guice.createInjector(new InjectionConfigLicenceCore()).getInstance(LicenceUseCase.class);
+    private static LicenceUseCase licenceUC = Guice.createInjector(new LicenceCoreInjectionConfig()).getInstance(LicenceUseCase.class);
 
     private LicenceHandler() {
     }

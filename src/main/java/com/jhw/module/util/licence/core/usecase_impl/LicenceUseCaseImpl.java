@@ -1,19 +1,17 @@
 package com.jhw.module.util.licence.core.usecase_impl;
 
 import com.clean.core.app.services.ExceptionHandler;
-import com.clean.core.app.services.Notification;
-import com.clean.core.app.usecase.DefaultReadWriteUseCase;
+import com.clean.core.app.usecase.DefaultCRUDUseCase;
 import com.clean.core.domain.services.Resource;
 import com.jhw.module.util.licence.core.repo_def.LicenceRepo;
 import com.google.common.io.BaseEncoding;
 import com.jhw.module.util.licence.core.usecase_def.LicenceUseCase;
-import com.jhw.module.util.licence.core.domain.Licence;
+import com.jhw.module.util.licence.core.domain.LicenceDomain;
 import com.jhw.module.util.licence.core.module.CONFIG;
 import com.jhw.module.util.licence.core.module.LicenceCoreModule;
-import com.jhw.module.util.licence.core.utils.BadLicenceException;
+import com.jhw.module.util.licence.core.exception.BadLicenceException;
 import com.jhw.utils.security.AES;
-import java.util.Date;
-import javax.inject.Inject;
+import java.time.LocalDate;
 
 /**
  * Implementacion de la Interfaz {@code LicenceUseCase} para manejar el
@@ -21,7 +19,7 @@ import javax.inject.Inject;
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
-public class LicenceUseCaseImpl extends DefaultReadWriteUseCase<Licence> implements LicenceUseCase {
+public class LicenceUseCaseImpl extends DefaultCRUDUseCase<LicenceDomain> implements LicenceUseCase {
 
     public static final String MSG_NO_FILE = "msg.licence.no_file";
     public static final String MSG_INVALID = "msg.licence.invalid";
@@ -36,7 +34,6 @@ public class LicenceUseCaseImpl extends DefaultReadWriteUseCase<Licence> impleme
     /**
      * Constructor por defecto, usado par injectar.
      */
-    @Inject
     public LicenceUseCaseImpl() {
         super.setRepo(repo);
     }
@@ -51,25 +48,25 @@ public class LicenceUseCaseImpl extends DefaultReadWriteUseCase<Licence> impleme
     @Override
     public boolean isLicenceCorrect() {
         try {
-            Licence licence = null;
+            LicenceDomain licence = null;
             try {
-                licence = repo.read();
+                licence = read();
             } catch (Exception e) {
             }
             if (licence == null) {
                 throw new BadLicenceException(Resource.getString(MSG_NO_FILE));
             }
-            if (!licence.isLicenceValid()) {
+            if (!licence.checkIntegrity()) {
                 throw new BadLicenceException(Resource.getString(MSG_INVALID));
             }
-            Date now = new Date();
-            if (now.before(licence.getFechaUltimoRevisado())
-                    || now.before(licence.getFechaInicio())) {
+            LocalDate now = LocalDate.now();
+            if (now.isBefore(licence.getFechaUltimoRevisado())
+                    || now.isBefore(licence.getFechaInicio()))  {
                 throw new BadLicenceException(Resource.getString(MSG_CORRUPT));
             }
             licence.setFechaUltimoRevisado(now);
-            repo.write(licence);
-            if (licence.getFechaUltimoRevisado().after(licence.getFechaFin())) {
+            write(licence);
+            if (licence.getFechaUltimoRevisado().isAfter(licence.getFechaFin())) {
                 throw new BadLicenceException(Resource.getString(MSG_EXPIRED));
             }
             return true;
@@ -79,10 +76,18 @@ public class LicenceUseCaseImpl extends DefaultReadWriteUseCase<Licence> impleme
         }
     }
 
+    private LicenceDomain read() throws Exception {
+        return findAll().get(0);
+    }
+
+    private void write(LicenceDomain licence) throws Exception {
+        edit(licence);
+    }
+
     @Override
     public int daysUntilActivation() {
         try {
-            return repo.read().daysUntilActivation();
+            return read().daysUntilActivation();
         } catch (Exception e) {
             return 0;
         }
@@ -97,9 +102,9 @@ public class LicenceUseCaseImpl extends DefaultReadWriteUseCase<Licence> impleme
      */
     @Override
     public void activateLicence(String codeCypher) throws Exception {
-        Licence act = activate(codeCypher);
-        if (act.isLicenceValid()) {
-            repo.write(act);
+        LicenceDomain act = activate(codeCypher);
+        if (act.checkIntegrity()) {
+            write(act);
         } else {
             throw new NullPointerException("Error activando el programa.");
         }
@@ -113,9 +118,9 @@ public class LicenceUseCaseImpl extends DefaultReadWriteUseCase<Licence> impleme
      * @return la Licencia activada
      * @throws Exception si hay algun problema en la activacion
      */
-    private Licence activate(String codeCypher) throws Exception {
+    private LicenceDomain activate(String codeCypher) throws Exception {
         byte base[] = BaseEncoding.base64().decode(codeCypher);
         byte des[] = AES.decipher(CONFIG.HARDCORE_PASSWORD, base);
-        return new Licence(new String(des));
+        return new LicenceDomain(new String(des));
     }
 }
