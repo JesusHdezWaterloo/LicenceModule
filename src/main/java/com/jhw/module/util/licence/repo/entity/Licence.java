@@ -68,6 +68,11 @@ public class Licence implements Serializable {
         this.licence = licence;
     }
 
+    public Licence(String clientCode, String licence) {
+        this.clientCode = clientCode;
+        this.licence = licence;
+    }
+
     public Integer getIdLicence() {
         return idLicence;
     }

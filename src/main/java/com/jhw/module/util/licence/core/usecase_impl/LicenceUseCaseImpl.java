@@ -21,7 +21,7 @@ import java.time.LocalDate;
 public class LicenceUseCaseImpl extends DefaultCRUDUseCase<LicenceDomain> implements LicenceUseCase {
 
     public static final byte[] HARDCORE_PASSWORD = new byte[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};//SerialNumber.getUID();
-    
+
     public static final String MSG_NO_FILE = "msg.licence.no_file";
     public static final String MSG_INVALID = "msg.licence.invalid";
     public static final String MSG_CORRUPT = "msg.licence.corrupt";
@@ -77,14 +77,6 @@ public class LicenceUseCaseImpl extends DefaultCRUDUseCase<LicenceDomain> implem
         }
     }
 
-    private LicenceDomain read() throws Exception {
-        return findAll().get(0);
-    }
-
-    private void write(LicenceDomain licence) throws Exception {
-        edit(licence);
-    }
-
     @Override
     public int daysUntilActivation() {
         try {
@@ -103,25 +95,16 @@ public class LicenceUseCaseImpl extends DefaultCRUDUseCase<LicenceDomain> implem
      */
     @Override
     public void activateLicence(String codeCypher) throws Exception {
-        LicenceDomain act = activate(codeCypher);
-        if (act.checkIntegrity()) {
-            write(act);
-        } else {
-            throw new NullPointerException("Error activando el programa.");
-        }
+        repo.activate(codeCypher);
     }
 
-    /**
-     * Lleva a cabo el proceso de activar la licencia en dependencia de un
-     * codigo de activacion cifrado.
-     *
-     * @param codeCypher codigo de activacion cifrado
-     * @return la Licencia activada
-     * @throws Exception si hay algun problema en la activacion
-     */
-    private LicenceDomain activate(String codeCypher) throws Exception {
-        byte base[] = BaseEncoding.base64().decode(codeCypher);
-        byte des[] = AES.decipher(HARDCORE_PASSWORD, base);
-        return new LicenceDomain(new String(des));
+    @Override
+    public LicenceDomain read() throws Exception {
+        return repo.read();
+    }
+
+    @Override
+    public void write(LicenceDomain licence) throws Exception {
+        repo.write(licence);
     }
 }
