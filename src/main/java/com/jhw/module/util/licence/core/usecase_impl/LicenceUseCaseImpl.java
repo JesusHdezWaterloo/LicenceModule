@@ -19,11 +19,6 @@ import java.time.LocalDate;
  */
 public class LicenceUseCaseImpl extends DefaultCRUDUseCase<LicenceDomain> implements LicenceUseCase {
 
-    public static final String MSG_NO_FILE = "msg.licence.no_file";
-    public static final String MSG_INVALID = "msg.licence.invalid";
-    public static final String MSG_CORRUPT = "msg.licence.corrupt";
-    public static final String MSG_EXPIRED = "msg.licence.expired";
-
     /**
      * Instancia del repo para almacenar las cosas en memoria
      */
@@ -55,12 +50,12 @@ public class LicenceUseCaseImpl extends DefaultCRUDUseCase<LicenceDomain> implem
 
             //NO EXISTE
             if (licence == null) {
-                throw new BadLicenceException(Resource.getString(MSG_NO_FILE));
+                throw new BadLicenceException(Resource.getString("NO LICENCE"));
             }
 
             //NO es integra: INVALIDA
             if (!licence.checkIntegrity()) {
-                throw new BadLicenceException(Resource.getString(MSG_INVALID));
+                throw new BadLicenceException(Resource.getString("INVALID"));
             }
 
             LocalDate now = LocalDate.now();
@@ -68,12 +63,12 @@ public class LicenceUseCaseImpl extends DefaultCRUDUseCase<LicenceDomain> implem
             //si hoy es antes de la ultima fecha o el inicio: CORRUPTA
             if (now.isBefore(licence.getFechaUltimoRevisado())
                     || now.isBefore(licence.getFechaInicio())) {
-                throw new BadLicenceException(Resource.getString(MSG_CORRUPT));
+                throw new BadLicenceException(Resource.getString("CORRUPT"));
             }
 
             //si hoy es pasada la fecha de fin: EXPIRADA
             if (now.isAfter(licence.getFechaFin())) {
-                throw new BadLicenceException(Resource.getString(MSG_EXPIRED));
+                throw new BadLicenceException(Resource.getString("EXPIRED"));
             }
 
             //si la ultima fecha es despues de hoy actualizo
