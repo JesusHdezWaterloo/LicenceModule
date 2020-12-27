@@ -9,6 +9,7 @@ import com.jhw.module.util.licence.core.module.LicenceCoreModule;
 import com.jhw.module.util.licence.core.usecase_def.LicenceUseCase;
 import com.jhw.module.util.licence.services.LicenceResourceService;
 import com.jhw.module.util.licence.services.LicenceResourceServiceServerImplementation;
+import com.jhw.module.util.licence.services.LicenceServiceImpl;
 import org.springframework.stereotype.Component;
 
 /**
@@ -23,11 +24,11 @@ public class A_ModuleUtilLicence {
     public final static LicenceUseCase licenceUC;
 
     static {
+        LicenceServiceImpl.init();
         LicenceResourceServiceServerImplementation.init();
         LicenceResourceService.init();
 
         LicenceCoreModule.init();
-
         licenceUC = LicenceCoreModule.getInstance().getImplementation(LicenceUseCase.class);
     }
 }
