@@ -25,22 +25,20 @@ public class LicenceRESTService extends RESTServiceTemplate<LicenceDomain> imple
         setUseCase(licenceUC);
     }
 
-    /*@Override
-    @GetMapping(GASTO_REPORTE_POR_TIPO_PATH)
-    public HashMap<TipoGastoDomain, BigDecimal> reporteGastadoPorGasto() throws Exception {
-        return gastoUC.reporteGastadoPorGasto();
-    }*/
     @Override
-    public boolean isLicenceCorrect() {
-        return licenceUC.isLicenceCorrect();
+    @GetMapping(LICENCE_IS_ACTIVE_PATH)
+    public boolean isActive() {
+        return licenceUC.isActive();
     }
 
     @Override
-    public void activateLicence(String codeCypher) throws Exception {
-        licenceUC.activateLicence(codeCypher);
+    @PostMapping(LICENCE_ACTIVE_PATH)
+    public void activate(String codeCypher) throws Exception {
+        licenceUC.activate(codeCypher);
     }
 
     @Override
+    @GetMapping(LICENCE_DAYS_LEFT_PATH)
     public int daysUntilActivation() {
         return licenceUC.daysUntilActivation();
     }
