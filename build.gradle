@@ -17,7 +17,6 @@ dependencies {
     
     implementation project(':utils-core')
     implementation project(':clean-core-full')
-    implementation project(':clean-swing')
     
     implementation project(':utils-spring')
     implementation project(':module-util-mysql')
