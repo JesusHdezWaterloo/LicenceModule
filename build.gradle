@@ -4,6 +4,8 @@ plugins {
 
 group = 'com.jhw.module.util'
 
+version = '2.0.0.SNAPSHOT.20201226'
+
 repositories {
     jcenter()
     mavenCentral()
@@ -11,18 +13,23 @@ repositories {
 
 
 dependencies {
+    compile group: 'org.springframework', name: 'spring-web', version: '5.2.9.RELEASE'
+    compile group: 'org.springframework', name: 'spring-context', version: '5.2.9.RELEASE'
     testCompile 'junit:junit:4.13'
     
     implementation project(':utils-core')
     implementation project(':clean-core-full')
-    implementation project(':clean-swing')
     
-    implementation project(':swing-derivable_icons')
-    implementation project(':swing-material-standards')
-    implementation project(':module-util-personalization')
-    
-    implementation project(':swing-material-core')
+    implementation project(':utils-spring')
+    implementation project(':module-util-mysql')
+    implementation project(':module-util-licence-standard')
 
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.17'
+    
+    //EclipseLink
+    compile group: 'org.eclipse.persistence', name: 'eclipselink', version: '2.7.6'
+    compile group: 'org.eclipse.persistence', name: 'org.eclipse.persistence.jpa', version: '2.7.6'
+    
     compile group: 'com.google.inject', name: 'guice', version: '4.2.3'
     compile group: 'javax.inject', name: 'javax.inject', version: '1'
 }

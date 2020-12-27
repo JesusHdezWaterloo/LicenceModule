@@ -4,6 +4,7 @@ import com.clean.core.app.modules.AbstractModule;
 import com.clean.core.app.modules.DefaultAbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.jhw.module.util.licence.repo.module.LicenceRepoModule;
 
 /**
  * Modulo de licencia-core.
@@ -12,9 +13,7 @@ import com.google.inject.Injector;
  */
 public class LicenceCoreModule extends DefaultAbstractModule {
 
-    private final Injector inj = Guice.createInjector(new InjectionConfigLicenceCore());
-
-    public static final int DIF = 4;
+    private final Injector inj = Guice.createInjector(new LicenceCoreInjectionConfig());
 
     private static LicenceCoreModule INSTANCE;
 
@@ -23,6 +22,14 @@ public class LicenceCoreModule extends DefaultAbstractModule {
             throw new NullPointerException("El modulo de licencia no se ha inicializado");
         }
         return INSTANCE;
+    }
+
+    public static LicenceCoreModule init() {
+        if (INSTANCE == null) {
+            INSTANCE = new LicenceCoreModule();
+            INSTANCE.registerModule(LicenceRepoModule.init());
+        }
+        return getInstance();
     }
 
     public static LicenceCoreModule init(AbstractModule repoModule) {
@@ -38,7 +45,7 @@ public class LicenceCoreModule extends DefaultAbstractModule {
 
     @Override
     public String getModuleName() {
-        return "Licence Module";
+        return "Licence Core Module Server";
     }
 
 }

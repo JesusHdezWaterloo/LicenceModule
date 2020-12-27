@@ -1,19 +1,15 @@
 package com.jhw.module.util.licence.core.usecase_impl;
 
 import com.clean.core.app.services.ExceptionHandler;
-import com.clean.core.app.services.Notification;
-import com.clean.core.app.usecase.DefaultReadWriteUseCase;
+import com.clean.core.app.usecase.DefaultCRUDUseCase;
 import com.clean.core.domain.services.Resource;
 import com.jhw.module.util.licence.core.repo_def.LicenceRepo;
-import com.google.common.io.BaseEncoding;
 import com.jhw.module.util.licence.core.usecase_def.LicenceUseCase;
-import com.jhw.module.util.licence.core.domain.Licence;
-import com.jhw.module.util.licence.core.module.CONFIG;
+import com.jhw.module.util.licence.core.domain.LicenceDomain;
+import com.jhw.module.util.licence.core.domain.LicenceDomainSimpleConverter;
 import com.jhw.module.util.licence.core.module.LicenceCoreModule;
-import com.jhw.module.util.licence.core.utils.BadLicenceException;
-import com.jhw.utils.security.AES;
-import java.util.Date;
-import javax.inject.Inject;
+import com.jhw.module.util.licence.core.exception.BadLicenceException;
+import java.time.LocalDate;
 
 /**
  * Implementacion de la Interfaz {@code LicenceUseCase} para manejar el
@@ -21,12 +17,7 @@ import javax.inject.Inject;
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
-public class LicenceUseCaseImpl extends DefaultReadWriteUseCase<Licence> implements LicenceUseCase {
-
-    public static final String MSG_NO_FILE = "msg.licence.no_file";
-    public static final String MSG_INVALID = "msg.licence.invalid";
-    public static final String MSG_CORRUPT = "msg.licence.corrupt";
-    public static final String MSG_EXPIRED = "msg.licence.expired";
+public class LicenceUseCaseImpl extends DefaultCRUDUseCase<LicenceDomain> implements LicenceUseCase {
 
     /**
      * Instancia del repo para almacenar las cosas en memoria
@@ -36,7 +27,6 @@ public class LicenceUseCaseImpl extends DefaultReadWriteUseCase<Licence> impleme
     /**
      * Constructor por defecto, usado par injectar.
      */
-    @Inject
     public LicenceUseCaseImpl() {
         super.setRepo(repo);
     }
@@ -49,40 +39,57 @@ public class LicenceUseCaseImpl extends DefaultReadWriteUseCase<Licence> impleme
      * @return true si la licencia es correcta, false en cualquier otro caso
      */
     @Override
-    public boolean isLicenceCorrect() {
+    public boolean isActive() {
         try {
-            Licence licence = null;
+            System.out.println("Comprobando licencia");
+            LicenceDomain licence = null;
             try {
-                licence = repo.read();
+                licence = read();
             } catch (Exception e) {
             }
+
+            //NO EXISTE
             if (licence == null) {
-                throw new BadLicenceException(Resource.getString(MSG_NO_FILE));
+                throw new BadLicenceException(Resource.getString("NO LICENCE"));
             }
-            if (!licence.isLicenceValid()) {
-                throw new BadLicenceException(Resource.getString(MSG_INVALID));
+
+            //NO es integra: INVALIDA
+            if (!licence.checkIntegrity()) {
+                throw new BadLicenceException(Resource.getString("INVALID"));
             }
-            Date now = new Date();
-            if (now.before(licence.getFechaUltimoRevisado())
-                    || now.before(licence.getFechaInicio())) {
-                throw new BadLicenceException(Resource.getString(MSG_CORRUPT));
+
+            LocalDate now = LocalDate.now();
+
+            //si hoy es antes de la ultima fecha o el inicio: CORRUPTA
+            if (now.isBefore(licence.getFechaUltimoRevisado())
+                    || now.isBefore(licence.getFechaInicio())) {
+                throw new BadLicenceException(Resource.getString("CORRUPT"));
             }
-            licence.setFechaUltimoRevisado(now);
-            repo.write(licence);
-            if (licence.getFechaUltimoRevisado().after(licence.getFechaFin())) {
-                throw new BadLicenceException(Resource.getString(MSG_EXPIRED));
+
+            //si hoy es pasada la fecha de fin: EXPIRADA
+            if (now.isAfter(licence.getFechaFin())) {
+                throw new BadLicenceException(Resource.getString("EXPIRED"));
             }
+
+            //si la ultima fecha es despues de hoy actualizo
+            if (licence.getFechaUltimoRevisado().isAfter(now)) {
+                licence.setFechaUltimoRevisado(now);
+                System.out.println("Actualizando la licencia");
+                write(licence);
+            }
+            System.out.println("Todo OK " + (cant++));
             return true;
         } catch (Exception e) {
-            ExceptionHandler.handleException(e);
+            System.out.println("Error comprobando la licencia " + e.getMessage());
             return false;
         }
     }
+    int cant = 1;
 
     @Override
     public int daysUntilActivation() {
         try {
-            return repo.read().daysUntilActivation();
+            return read().daysUntilActivation();
         } catch (Exception e) {
             return 0;
         }
@@ -92,30 +99,25 @@ public class LicenceUseCaseImpl extends DefaultReadWriteUseCase<Licence> impleme
      * Activa la licencia. Si el codigo de cifrado esta bien, la activa y guarda
      * en memoria, sino lanza excepcion.
      *
-     * @param codeCypher codigo de activacion cifrado
+     * @param actvationCode codigo de activacion cifrado
      * @throws Exception si hay algun problema en la activacion
      */
     @Override
-    public void activateLicence(String codeCypher) throws Exception {
-        Licence act = activate(codeCypher);
-        if (act.isLicenceValid()) {
-            repo.write(act);
-        } else {
+    public void activate(String actvationCode) throws Exception {
+        LicenceDomain domain = LicenceDomainSimpleConverter.getInstance().from(actvationCode);
+        if (!domain.checkIntegrity()) {
             throw new NullPointerException("Error activando el programa.");
         }
+        write(domain);
     }
 
-    /**
-     * Lleva a cabo el proceso de activar la licencia en dependencia de un
-     * codigo de activacion cifrado.
-     *
-     * @param codeCypher codigo de activacion cifrado
-     * @return la Licencia activada
-     * @throws Exception si hay algun problema en la activacion
-     */
-    private Licence activate(String codeCypher) throws Exception {
-        byte base[] = BaseEncoding.base64().decode(codeCypher);
-        byte des[] = AES.decipher(CONFIG.HARDCORE_PASSWORD, base);
-        return new Licence(new String(des));
+    @Override
+    public LicenceDomain read() throws Exception {
+        return repo.read();
+    }
+
+    @Override
+    public void write(LicenceDomain licence) throws Exception {
+        repo.write(licence);
     }
 }
