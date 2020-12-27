@@ -44,35 +44,52 @@ public class LicenceUseCaseImpl extends DefaultCRUDUseCase<LicenceDomain> implem
      * @return true si la licencia es correcta, false en cualquier otro caso
      */
     @Override
-    public boolean isLicenceCorrect() {
+    public boolean isActive() {
         try {
+            System.out.println("Comprobando licencia");
             LicenceDomain licence = null;
             try {
                 licence = read();
             } catch (Exception e) {
             }
+
+            //NO EXISTE
             if (licence == null) {
                 throw new BadLicenceException(Resource.getString(MSG_NO_FILE));
             }
+
+            //NO es integra: INVALIDA
             if (!licence.checkIntegrity()) {
                 throw new BadLicenceException(Resource.getString(MSG_INVALID));
             }
+
             LocalDate now = LocalDate.now();
+
+            //si hoy es antes de la ultima fecha o el inicio: CORRUPTA
             if (now.isBefore(licence.getFechaUltimoRevisado())
                     || now.isBefore(licence.getFechaInicio())) {
                 throw new BadLicenceException(Resource.getString(MSG_CORRUPT));
             }
-            licence.setFechaUltimoRevisado(now);
-            write(licence);
-            if (licence.getFechaUltimoRevisado().isAfter(licence.getFechaFin())) {
+
+            //si hoy es pasada la fecha de fin: EXPIRADA
+            if (now.isAfter(licence.getFechaFin())) {
                 throw new BadLicenceException(Resource.getString(MSG_EXPIRED));
             }
+
+            //si la ultima fecha es despues de hoy actualizo
+            if (licence.getFechaUltimoRevisado().isAfter(now)) {
+                licence.setFechaUltimoRevisado(now);
+                System.out.println("Actualizando la licencia");
+                write(licence);
+            }
+            System.out.println("Todo OK " + (cant++));
             return true;
         } catch (Exception e) {
-            ExceptionHandler.handleException(e);
+            System.out.println("Error comprobando la licencia " + e.getMessage());
             return false;
         }
     }
+    int cant = 1;
 
     @Override
     public int daysUntilActivation() {
