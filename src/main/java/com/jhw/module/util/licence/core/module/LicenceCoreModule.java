@@ -15,8 +15,6 @@ public class LicenceCoreModule extends DefaultAbstractModule {
 
     private final Injector inj = Guice.createInjector(new LicenceCoreInjectionConfig());
 
-    public static final int DIF = 4;
-
     private static LicenceCoreModule INSTANCE;
 
     public static LicenceCoreModule getInstance() {
@@ -47,7 +45,7 @@ public class LicenceCoreModule extends DefaultAbstractModule {
 
     @Override
     public String getModuleName() {
-        return "Licence Module Server";
+        return "Licence Core Module Server";
     }
 
 }
