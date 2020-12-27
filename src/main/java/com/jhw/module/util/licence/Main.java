@@ -35,8 +35,8 @@ public class Main {
 
     private static void create() throws Exception {
         LocalDate inicio = LocalDate.now();
-        LocalDate fin = inicio.plusDays(30);
-        long token = 7848;//GENERATOR.generateToken(inicio, fin, DIFICULTY.VALUE);
+        LocalDate fin = inicio.plusDays(5);
+        long token = GENERATOR.generateToken(inicio, fin, DIFICULTY.VALUE);
 
         LicenceDomain lic = new LicenceDomain(token, inicio, fin);
 
