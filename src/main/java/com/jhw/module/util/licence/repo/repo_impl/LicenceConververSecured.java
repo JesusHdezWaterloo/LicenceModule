@@ -8,6 +8,7 @@ package com.jhw.module.util.licence.repo.repo_impl;
 import com.clean.core.app.repo.Converter;
 import com.jhw.module.util.licence.core.domain.LicenceDomain;
 import com.jhw.module.util.licence.repo.entity.Licence;
+import com.jhw.utils.jackson.JACKSON;
 import com.jhw.utils.security.AES;
 import com.jhw.utils.services.ConverterService;
 import java.util.Base64;
@@ -26,7 +27,7 @@ public class LicenceConververSecured implements Converter<LicenceDomain, Licence
         String string = entity.getLicence();
         string = decipher(string);
 
-        LicenceDomain domain = ConverterService.convert(string, LicenceDomain.class);
+        LicenceDomain domain = JACKSON.read(string, LicenceDomain.class);//directo xq se esta leyendo de un String y por el converter se parte
 
         domain.setIdLicence(entity.getIdLicence());
         domain.setClientCode(entity.getClientCode());
