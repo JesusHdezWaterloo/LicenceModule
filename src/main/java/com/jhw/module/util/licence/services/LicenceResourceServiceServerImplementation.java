@@ -10,19 +10,24 @@ import java.net.MalformedURLException;
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
-public class LicenceResourceService implements ResourceService {
+public class LicenceResourceServiceServerImplementation implements ResourceService {
 
-    public static final String RESOURCE_URL = "licence";
+    public static final String RESOURCE_URL = "module_licence_server";
 
     private final DefaultResourceBundleService resourceService;
 
-    public static LicenceResourceService init() throws MalformedURLException {
-        LicenceResourceService res = new LicenceResourceService();
-        Resource.registerResourceService(res);
-        return res;
+    public static LicenceResourceServiceServerImplementation init() {
+        try {
+
+            LicenceResourceServiceServerImplementation res = new LicenceResourceServiceServerImplementation();
+            Resource.registerResourceService(res);
+            return res;
+        } catch (Exception e) {
+        }
+        return null;
     }
 
-    private LicenceResourceService() throws MalformedURLException {
+    private LicenceResourceServiceServerImplementation() throws MalformedURLException {
         resourceService = new DefaultResourceBundleService(
                 ResourceBundleUtils.fromInternalFile(RESOURCE_URL,
                         ResourceBundleUtils.SPANISH));

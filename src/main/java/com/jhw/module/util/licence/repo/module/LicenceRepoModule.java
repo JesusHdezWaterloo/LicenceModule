@@ -3,6 +3,7 @@ package com.jhw.module.util.licence.repo.module;
 import com.clean.core.app.modules.DefaultAbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.jhw.module.util.licence.repo.utils.ResourcesLicence;
 
 /**
  * Modulo de licencia-core.
@@ -11,22 +12,28 @@ import com.google.inject.Injector;
  */
 public class LicenceRepoModule extends DefaultAbstractModule {
 
-    private final Injector inj = Guice.createInjector(new InjectionConfigLicenceRepo());
+    private final Injector inj = Guice.createInjector(new LicenceRepoInjectionConfig());
 
     private static LicenceRepoModule INSTANCE;
+
+    static {
+        ResourcesLicence.initEMF();
+    }
 
     private LicenceRepoModule() {
     }
 
     public static LicenceRepoModule getInstance() {
         if (INSTANCE == null) {
-            throw new NullPointerException("El modulo de Person no se ha inicializado");
+            throw new NullPointerException("El modulo de Licencia no se ha inicializado");
         }
         return INSTANCE;
     }
 
     public static LicenceRepoModule init() {
-        INSTANCE = new LicenceRepoModule();
+        if (INSTANCE == null) {
+            INSTANCE = new LicenceRepoModule();
+        }
         return getInstance();
     }
 
@@ -37,7 +44,7 @@ public class LicenceRepoModule extends DefaultAbstractModule {
 
     @Override
     public String getModuleName() {
-        return "Licence Repo Module";
+        return "Licence Repo Module Server";
     }
 
 }
