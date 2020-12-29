@@ -28,14 +28,14 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        //create();
-        read();
+        create();
+        //read();
         //convert();
     }
 
     private static void create() throws Exception {
         LocalDate inicio = LocalDate.now();
-        LocalDate fin = inicio.plusDays(5);
+        LocalDate fin = inicio.plusDays(5000);
         long token = GENERATOR.generateToken(inicio, fin, DIFICULTY.VALUE);
 
         LicenceDomain lic = new LicenceDomain(token, inicio, fin);

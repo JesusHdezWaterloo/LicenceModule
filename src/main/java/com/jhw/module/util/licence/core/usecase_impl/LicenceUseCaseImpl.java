@@ -41,7 +41,6 @@ public class LicenceUseCaseImpl extends DefaultCRUDUseCase<LicenceDomain> implem
     @Override
     public boolean isActive() {
         try {
-            System.out.println("Comprobando licencia");
             LicenceDomain licence = null;
             try {
                 licence = read();
@@ -77,14 +76,12 @@ public class LicenceUseCaseImpl extends DefaultCRUDUseCase<LicenceDomain> implem
                 System.out.println("Actualizando la licencia");
                 write(licence);
             }
-            System.out.println("Todo OK " + (cant++));
             return true;
         } catch (Exception e) {
             System.out.println("Error comprobando la licencia " + e.getMessage());
             return false;
         }
     }
-    int cant = 1;
 
     @Override
     public int daysUntilActivation() {
