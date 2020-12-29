@@ -29,8 +29,12 @@ public class LicenceConververSecured implements Converter<LicenceDomain, Licence
 
         LicenceDomain domain = JACKSON.read(string, LicenceDomain.class);//directo xq se esta leyendo de un String y por el converter se parte
 
-        domain.setIdLicence(entity.getIdLicence());
-        domain.setClientCode(entity.getClientCode());
+        if (entity.getIdLicence() != null) {
+            domain.setIdLicence(entity.getIdLicence());
+        }
+        if (entity.getClientCode() != null) {
+            domain.setClientCode(entity.getClientCode());
+        }
 
         return domain;
     }
@@ -38,13 +42,18 @@ public class LicenceConververSecured implements Converter<LicenceDomain, Licence
     @Override
     public Licence to(LicenceDomain domain) throws Exception {
         //el objeto limpio, cifrarlo y encodearlo e 64
-        String string = ConverterService.convert(domain, String.class);
+        String string = JACKSON.toString(domain);//ConverterService.convert(domain, String.class);
         string = cipher(string);
 
         Licence entity = new Licence("cod_cliente_UNKNOWN", string);
-
-        entity.setIdLicence(domain.getIdLicence());
-        entity.setClientCode(domain.getClientCode());
+        
+        if (domain.getIdLicence() != null) {
+            entity.setIdLicence(domain.getIdLicence());
+        }
+        
+        if (domain.getClientCode() != null) {
+            entity.setClientCode(domain.getClientCode());
+        }
 
         return entity;
     }
