@@ -1,0 +1,32 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.root101.module.control.licence.services;
+
+import com.root101.clean.core.app.services.LicenceHandler;
+import com.root101.clean.core.app.services.LicenceService;
+import com.root101.module.control.licence.rest.A_ModuleUtilLicence;
+
+/**
+ *
+ * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
+ */
+public class LicenceServiceImpl implements LicenceService {
+
+    public static LicenceServiceImpl init() {
+        LicenceServiceImpl res = new LicenceServiceImpl();
+        LicenceHandler.registerLicenceService(res);
+        return res;
+    }
+
+    private LicenceServiceImpl() {
+    }
+
+    @Override
+    public boolean isActive() {
+        return A_ModuleUtilLicence.licenceUC.isActive();
+    }
+
+}
