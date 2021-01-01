@@ -4,7 +4,7 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>com.root101.module.control.licence.repo.entity.Licence</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:7733/admin_licence?serverTimezone=UTC"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:7733/root101_control_licence?serverTimezone=UTC"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value=""/>

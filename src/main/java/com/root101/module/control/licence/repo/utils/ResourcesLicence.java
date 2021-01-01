@@ -27,7 +27,7 @@ import javax.persistence.Persistence;
  */
 public class ResourcesLicence {
 
-    public static final String SCHEMA = "admin_licence";
+    public static final String SCHEMA = "root101_control_licence";
 
     public static EntityManagerFactory EMF;
 
