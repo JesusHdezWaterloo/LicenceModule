@@ -1,6 +1,6 @@
 package com.jhw.module.util.licence.core.injection;
 
-import com.clean.core.utils.Licenced;
+import com.root101.clean.core.utils.Licenced;
 import com.google.inject.AbstractModule;
 import com.google.inject.matcher.Matchers;
 

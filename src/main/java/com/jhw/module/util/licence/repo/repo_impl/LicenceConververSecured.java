@@ -5,12 +5,11 @@
  */
 package com.jhw.module.util.licence.repo.repo_impl;
 
-import com.clean.core.app.repo.Converter;
+import com.root101.clean.core.app.repo.Converter;
 import com.jhw.module.util.licence.core.domain.LicenceDomain;
 import com.jhw.module.util.licence.repo.entity.Licence;
-import com.jhw.utils.jackson.JACKSON;
-import com.jhw.utils.security.AES;
-import com.jhw.utils.services.ConverterService;
+import com.root101.json.jackson.JACKSON;
+import com.root101.security.AES;
 import java.util.Base64;
 
 /**

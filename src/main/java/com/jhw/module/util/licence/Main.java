@@ -5,18 +5,12 @@
  */
 package com.jhw.module.util.licence;
 
-import com.jhw.module.util.licence.core.usecase_def.LicenceUseCase;
 import com.jhw.module.util.licence.core.domain.LicenceDomain;
 import com.jhw.module.util.licence.core.domain.LicenceDomainSimpleConverter;
-import com.jhw.module.util.licence.core.module.LicenceCoreModule;
 import com.jhw.module.util.licence.generator.GENERATOR;
-import com.jhw.module.util.licence.repo.entity.Licence;
-import com.jhw.module.util.licence.repo.module.LicenceRepoModule;
 import com.jhw.module.util.licence.rest.A_ModuleUtilLicence;
-import com.jhw.module.util.mysql.services.MySQLHandler;
-import com.jhw.utils.services.ConverterService;
+import com.root101.utils.services.ConverterService;
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  *

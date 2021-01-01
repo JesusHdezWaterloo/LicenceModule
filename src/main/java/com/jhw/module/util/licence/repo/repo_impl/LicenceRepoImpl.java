@@ -4,7 +4,7 @@ import com.jhw.module.util.licence.core.repo_def.*;
 import com.jhw.module.util.licence.core.domain.*;
 import com.jhw.module.util.licence.repo.entity.*;
 import com.jhw.module.util.licence.repo.utils.ResourcesLicence;
-import com.jhw.utils.jpa.JPACleanCRUDRepo;
+import com.root101.repo.jpa.JPACleanCRUDRepo;
 
 public class LicenceRepoImpl extends JPACleanCRUDRepo<LicenceDomain, Licence> implements LicenceRepo {
 

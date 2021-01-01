@@ -1,7 +1,7 @@
 package com.jhw.module.util.licence.core.module;
 
-import com.clean.core.app.modules.AbstractModule;
-import com.clean.core.app.modules.DefaultAbstractModule;
+import com.root101.clean.core.app.modules.AbstractModule;
+import com.root101.clean.core.app.modules.DefaultAbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.jhw.module.util.licence.repo.module.LicenceRepoModule;

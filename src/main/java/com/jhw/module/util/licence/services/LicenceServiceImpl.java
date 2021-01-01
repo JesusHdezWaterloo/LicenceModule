@@ -5,8 +5,8 @@
  */
 package com.jhw.module.util.licence.services;
 
-import com.clean.core.app.services.LicenceHandler;
-import com.clean.core.app.services.LicenceService;
+import com.root101.clean.core.app.services.LicenceHandler;
+import com.root101.clean.core.app.services.LicenceService;
 import com.jhw.module.util.licence.rest.A_ModuleUtilLicence;
 
 /**

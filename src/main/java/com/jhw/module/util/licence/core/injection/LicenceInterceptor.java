@@ -5,8 +5,8 @@
  */
 package com.jhw.module.util.licence.core.injection;
 
-import com.clean.core.app.services.LicenceHandler;
-import com.clean.core.domain.services.Resource;
+import com.root101.clean.core.app.services.LicenceHandler;
+import com.root101.clean.core.domain.services.ResourceHandler;
 import com.jhw.module.util.licence.core.exception.BadLicenceException;
 import com.jhw.module.util.licence.services.ResourceKeys;
 import org.aopalliance.intercept.MethodInterceptor;
@@ -28,7 +28,7 @@ public class LicenceInterceptor implements MethodInterceptor {
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
         if (!LicenceHandler.isActive()) {
-            throw new BadLicenceException(Resource.getString(ResourceKeys.MSG_BAD_LICENCE));
+            throw new BadLicenceException(ResourceHandler.getString(ResourceKeys.MSG_BAD_LICENCE));
         }
         return invocation.proceed();
     }

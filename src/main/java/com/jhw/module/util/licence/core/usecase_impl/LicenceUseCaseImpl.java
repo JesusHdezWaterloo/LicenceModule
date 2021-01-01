@@ -1,8 +1,8 @@
 package com.jhw.module.util.licence.core.usecase_impl;
 
-import com.clean.core.app.services.ExceptionHandler;
-import com.clean.core.app.usecase.DefaultCRUDUseCase;
-import com.clean.core.domain.services.Resource;
+import com.root101.clean.core.app.services.ExceptionHandler;
+import com.root101.clean.core.app.usecase.DefaultCRUDUseCase;
+import com.root101.clean.core.domain.services.ResourceHandler;
 import com.jhw.module.util.licence.core.repo_def.LicenceRepo;
 import com.jhw.module.util.licence.core.usecase_def.LicenceUseCase;
 import com.jhw.module.util.licence.core.domain.LicenceDomain;
@@ -49,12 +49,12 @@ public class LicenceUseCaseImpl extends DefaultCRUDUseCase<LicenceDomain> implem
 
             //NO EXISTE
             if (licence == null) {
-                throw new BadLicenceException(Resource.getString("NO LICENCE"));
+                throw new BadLicenceException(ResourceHandler.getString("NO LICENCE"));
             }
 
             //NO es integra: INVALIDA
             if (!licence.checkIntegrity()) {
-                throw new BadLicenceException(Resource.getString("INVALID"));
+                throw new BadLicenceException(ResourceHandler.getString("INVALID"));
             }
 
             LocalDate now = LocalDate.now();
@@ -62,12 +62,12 @@ public class LicenceUseCaseImpl extends DefaultCRUDUseCase<LicenceDomain> implem
             //si hoy es antes de la ultima fecha o el inicio: CORRUPTA
             if (now.isBefore(licence.getFechaUltimoRevisado())
                     || now.isBefore(licence.getFechaInicio())) {
-                throw new BadLicenceException(Resource.getString("CORRUPT"));
+                throw new BadLicenceException(ResourceHandler.getString("CORRUPT"));
             }
 
             //si hoy es pasada la fecha de fin: EXPIRADA
             if (now.isAfter(licence.getFechaFin())) {
-                throw new BadLicenceException(Resource.getString("EXPIRED"));
+                throw new BadLicenceException(ResourceHandler.getString("EXPIRED"));
             }
 
             //si la ultima fecha es despues de hoy actualizo
