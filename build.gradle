@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group = 'com.jhw.module.util'
+group = 'com.root101.module.control'
 
 version = '2.0.1.SNAPSHOT.20201228'
 
@@ -18,11 +18,11 @@ dependencies {
     testCompile 'junit:junit:4.13'
     
     implementation project(':utils-core')
-    implementation project(':clean-core-full')
+    implementation project(':clean-core')
     
     implementation project(':utils-spring')
     implementation project(':module-util-mysql')
-    implementation project(':module-util-licence-standard')
+    implementation project(':module-control-licence-standard')
 
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.17'
     
