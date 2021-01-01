@@ -26,10 +26,5 @@ hs_err_pid*
 .gradle
 *.DS_Store
 build/
-src/main/java/com/jhw/licence/core/main/CONFIG.java
-/src/main/java/com/jhw/licence/generator/
-lombok.config
-
 licence.lic
-
-src/main/java/com/jhw/module/util/licence/generator/GENERATOR.java
+/src/main/java/com/root101/module/control/licence/generator/
