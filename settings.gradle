@@ -1,4 +1,4 @@
-rootProject.name = 'module-util-licence-server'
+rootProject.name = 'module-control-licence-server'
 
 include ':clean-core'
 project(':clean-core').projectDir = "E:\\Trabajos\\Projects\\GIT Projects Gradle\\clean-core" as File
@@ -12,5 +12,5 @@ project(':module-util-mysql').projectDir = "E:\\Trabajos\\Projects\\GIT Projects
 include ':utils-spring'
 project(':utils-spring').projectDir = "E:\\Trabajos\\Projects\\GIT Projects Gradle\\utils-spring" as File
 
-include ':module-util-licence-standard'
-project(':module-util-licence-standard').projectDir = "E:\\Trabajos\\Projects\\GIT Projects Gradle\\module-util-licence-standard" as File
+include ':module-control-licence-standard'
+project(':module-control-licence-standard').projectDir = "E:\\Trabajos\\Projects\\GIT Projects Gradle\\module-control-licence-standard" as File
