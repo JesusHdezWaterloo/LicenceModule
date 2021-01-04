@@ -20,7 +20,10 @@ import com.root101.clean.core.app.modules.AbstractModule;
 import com.root101.clean.core.app.modules.DefaultAbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.root101.module.control.licence.repo.module.LicenceRepoModule;
+import com.root101.clean.core.domain.services.ResourceHandler;
+import com.root101.clean.core.exceptions.AlreadyInitModule;
+import com.root101.clean.core.exceptions.NotInitModule;
+import com.root101.module.control.licence.services.ResourceKeys;
 
 /**
  *
@@ -35,20 +38,15 @@ public class LicenceCoreModule extends DefaultAbstractModule {
 
     public static LicenceCoreModule getInstance() {
         if (INSTANCE == null) {
-            throw new NullPointerException("El modulo de licencia no se ha inicializado");
+            throw new NotInitModule(ResourceHandler.getString(ResourceKeys.KEY_MODULE_NAME_LICENCE));
         }
         return INSTANCE;
     }
 
-    public static LicenceCoreModule init() {
-        if (INSTANCE == null) {
-            INSTANCE = new LicenceCoreModule();
-            INSTANCE.registerModule(LicenceRepoModule.init());
-        }
-        return getInstance();
-    }
-
     public static LicenceCoreModule init(AbstractModule repoModule) {
+        if (INSTANCE != null) {
+            throw new AlreadyInitModule(ResourceHandler.getString(ResourceKeys.KEY_MODULE_NAME_LICENCE));
+        }
         INSTANCE = new LicenceCoreModule();
         INSTANCE.registerModule(repoModule);
         return getInstance();
