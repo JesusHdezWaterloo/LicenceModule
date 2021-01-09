@@ -24,4 +24,7 @@ package com.root101.module.control.licence.services;
 public class ResourceKeys {
 
     public static final String MSG_BAD_LICENCE = "msg.licence.bad_licence";
+
+    public static final String KEY_MODULE_NAME_LICENCE = "com.root101.module.control.licence.name";
+
 }

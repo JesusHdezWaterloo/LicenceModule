@@ -54,13 +54,13 @@ public class Licence implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_licence", nullable = false)
     private Integer idLicence;
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "client_code", nullable = false, length = 100)
     private String clientCode;
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 500)
@@ -133,5 +133,5 @@ public class Licence implements Serializable {
     public String toString() {
         return "com.root101.module.control.licence.repo.entity.Licence[ idLicence=" + idLicence + " ]";
     }
-    
+
 }

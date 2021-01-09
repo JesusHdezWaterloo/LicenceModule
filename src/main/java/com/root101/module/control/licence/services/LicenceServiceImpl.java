@@ -18,7 +18,7 @@ package com.root101.module.control.licence.services;
 
 import com.root101.clean.core.app.services.LicenceHandler;
 import com.root101.clean.core.app.services.LicenceService;
-import com.root101.module.control.licence.rest.A_ModuleUtilLicence;
+import com.root101.module.control.licence.rest.A_ModuleUtilLicenceRESTConfig;
 
 /**
  *
@@ -38,7 +38,7 @@ public class LicenceServiceImpl implements LicenceService {
 
     @Override
     public boolean isActive() {
-        return A_ModuleUtilLicence.licenceUC.isActive();
+        return A_ModuleUtilLicenceRESTConfig.licenceUC.isActive();
     }
 
 }

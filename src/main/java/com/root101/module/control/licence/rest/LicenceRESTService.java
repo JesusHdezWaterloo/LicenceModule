@@ -16,10 +16,10 @@
  */
 package com.root101.module.control.licence.rest;
 
-import static com.root101.module.control.licence.core.ModuleLicenceConstants.*;
+import com.root101.spring.server.RESTServiceTemplate;
+import static com.root101.module.control.licence.rest.ModuleLicenceRESTConstants.*;
 import com.root101.module.control.licence.core.domain.LicenceDomain;
 import com.root101.module.control.licence.core.usecase_def.LicenceUseCase;
-import com.jhw.utils.spring.server.*;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = LICENCE_LICENCE_GENERAL_PATH)
 public class LicenceRESTService extends RESTServiceTemplate<LicenceDomain> implements LicenceUseCase {
 
-    private final LicenceUseCase licenceUC = A_ModuleUtilLicence.licenceUC;
+    private final LicenceUseCase licenceUC = A_ModuleUtilLicenceRESTConfig.licenceUC;
 
     public LicenceRESTService() {
         setUseCase(licenceUC);
