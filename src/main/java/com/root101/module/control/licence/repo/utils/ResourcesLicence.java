@@ -16,7 +16,7 @@
  */
 package com.root101.module.control.licence.repo.utils;
 
-import com.jhw.module.util.mysql.services.MySQLHandler;
+import com.root101.module.util.mysql.services.MySQLHandler;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 

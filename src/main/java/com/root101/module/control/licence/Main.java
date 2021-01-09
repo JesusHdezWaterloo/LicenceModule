@@ -19,7 +19,7 @@ package com.root101.module.control.licence;
 import com.root101.module.control.licence.core.domain.LicenceDomain;
 import com.root101.module.control.licence.core.domain.LicenceDomainSimpleConverter;
 import com.root101.module.control.licence.generator.GENERATOR;
-import com.root101.module.control.licence.rest.A_ModuleUtilLicence;
+import com.root101.module.control.licence.rest.A_ModuleUtilLicenceRESTConfig;
 import com.root101.utils.services.ConverterService;
 import java.time.LocalDate;
 
@@ -48,11 +48,11 @@ public class Main {
 
         //String TO_SEND = GENERATOR.generateActivationCode(lic, new byte[0]);
         String TO_SEND = LicenceDomainSimpleConverter.getInstance().to(lic);
-        A_ModuleUtilLicence.licenceUC.activate(TO_SEND);
+        A_ModuleUtilLicenceRESTConfig.licenceUC.activate(TO_SEND);
     }
 
     private static void read() throws Exception {
-        LicenceDomain lic = A_ModuleUtilLicence.licenceUC.read();
+        LicenceDomain lic = A_ModuleUtilLicenceRESTConfig.licenceUC.read();
         System.out.println(lic);
     }
 

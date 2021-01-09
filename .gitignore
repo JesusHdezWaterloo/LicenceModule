@@ -26,5 +26,6 @@ hs_err_pid*
 .gradle
 *.DS_Store
 build/
-licence.lic
+
 /src/main/java/com/root101/module/control/licence/generator/
+src/main/java/com/root101/module/control/licence/repo/repo_impl/LicenceConververSecured.java

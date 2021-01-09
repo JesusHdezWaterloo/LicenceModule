@@ -43,6 +43,7 @@ public class LicenceUseCaseImpl extends DefaultCRUDUseCase<LicenceDomain> implem
      */
     public LicenceUseCaseImpl() {
         super.setRepo(repo);
+        isActive();
     }
 
     /**
@@ -84,8 +85,8 @@ public class LicenceUseCaseImpl extends DefaultCRUDUseCase<LicenceDomain> implem
                 throw new BadLicenceException(ResourceHandler.getString("EXPIRED"));
             }
 
-            //si la ultima fecha es despues de hoy actualizo
-            if (licence.getFechaUltimoRevisado().isAfter(now)) {
+            //si la ultima fecha es antes de hoy actualizo y ajusto
+            if (licence.getFechaUltimoRevisado().isBefore(now)) {
                 licence.setFechaUltimoRevisado(now);
                 System.out.println("Actualizando la licencia");
                 write(licence);

@@ -18,6 +18,7 @@ package com.root101.module.control.licence.rest;
 
 import com.root101.module.control.licence.core.module.LicenceCoreModule;
 import com.root101.module.control.licence.core.usecase_def.LicenceUseCase;
+import com.root101.module.control.licence.repo.module.LicenceRepoModule;
 import com.root101.module.control.licence.services.LicenceResourceService;
 import com.root101.module.control.licence.services.LicenceResourceServiceServerImplementation;
 import com.root101.module.control.licence.services.LicenceServiceImpl;
@@ -29,9 +30,9 @@ import org.springframework.stereotype.Component;
  * @author JesusHdezWaterloo@Github
  */
 @Component
-public class A_ModuleUtilLicence {
+public class A_ModuleUtilLicenceRESTConfig {
 
-    public static final String BASE_PACKAGE = "com.root101.module.control.licence";
+    public static final String BASE_PACKAGE = "com.root101.module.control.licence.rest";
 
     public final static LicenceUseCase licenceUC;
 
@@ -40,7 +41,8 @@ public class A_ModuleUtilLicence {
         LicenceResourceServiceServerImplementation.init();
         LicenceResourceService.init();
 
-        LicenceCoreModule.init();
+        LicenceCoreModule.init(LicenceRepoModule.init());
+
         licenceUC = LicenceCoreModule.getInstance().getImplementation(LicenceUseCase.class);
     }
 }
