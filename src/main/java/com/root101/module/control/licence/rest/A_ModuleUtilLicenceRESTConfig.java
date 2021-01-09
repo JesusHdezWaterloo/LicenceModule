@@ -42,7 +42,7 @@ public class A_ModuleUtilLicenceRESTConfig {
         LicenceResourceService.init();
 
         LicenceCoreModule.init(LicenceRepoModule.init());
-        
+
         licenceUC = LicenceCoreModule.getInstance().getImplementation(LicenceUseCase.class);
     }
 }

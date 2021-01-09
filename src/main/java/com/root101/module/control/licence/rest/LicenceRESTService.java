@@ -16,10 +16,10 @@
  */
 package com.root101.module.control.licence.rest;
 
+import com.root101.spring.server.RESTServiceTemplate;
 import static com.root101.module.control.licence.rest.ModuleLicenceRESTConstants.*;
 import com.root101.module.control.licence.core.domain.LicenceDomain;
 import com.root101.module.control.licence.core.usecase_def.LicenceUseCase;
-import com.jhw.utils.spring.server.*;
 import org.springframework.web.bind.annotation.*;
 
 /**

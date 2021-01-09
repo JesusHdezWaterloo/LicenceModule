@@ -57,11 +57,11 @@ public class LicenceConververSecured implements Converter<LicenceDomain, Licence
         string = cipher(string);
 
         Licence entity = new Licence("cod_cliente_UNKNOWN", string);
-        
+
         if (domain.getIdLicence() != null) {
             entity.setIdLicence(domain.getIdLicence());
         }
-        
+
         if (domain.getClientCode() != null) {
             entity.setClientCode(domain.getClientCode());
         }
